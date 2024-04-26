@@ -24,7 +24,7 @@ app.post('/consultar-envio', async (req, res) => {
       const fechayhora = result['soap:Envelope']['soap:Body'][0]['Trazabilidad_EnvioResponse'][0]['Trazabilidad_EnvioResult'][0]['diffgr:diffgram'][0]['NewDataSet'][0]['Table'][0]['fechayhora'][0];
 
       const mensaje = `El estado de su envío es: ${comentario}, y la última actualización fue el: ${fechayhora}`;
-      res.status(200).json({ mensaje });
+      res.status(200).send(mensaje);
     });
   } catch (error) {
     console.error('Error al consultar la API externa:', error);
