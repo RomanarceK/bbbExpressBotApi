@@ -28,7 +28,7 @@ app.post('/consultar-envio', async (req, res) => {
     });
   } catch (error) {
     console.error('Error al consultar la API externa:', error);
-    res.status(500).send('Error al consultar la API externa');
+    res.status(500).send('No se encontró información relacionada al código de trazabilidad');
   }
 });
 
