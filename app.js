@@ -32,6 +32,27 @@ app.post('/consultar-envio', async (req, res) => {
   }
 });
 
+app.post('/crear-pedido', (req, res) => {
+  try {
+    const rawBody = req.query.xml;
+    const xmlString = rawBody.toString('utf8');
+    
+    xml2js.parseString(xmlString, (err, result) => {
+      if (err) {
+          console.error('Error al parsear XML:', err);
+          res.status(400).send('Error al parsear XML');
+          return;
+      }
+
+      const resultData = result['soap:Envelope']['soap:Body'][0]['PedidosResponse'][0]['PedidosResult'][0];
+      res.status(200).send(resultData);
+    });
+  } catch (error) {
+    console.error('Error al parsear XML: ', error);
+    res.status(400).send('Error al parsear XML');
+  }
+  });
+
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
