@@ -45,6 +45,7 @@ app.post('/crear-pedido', (req, res) => {
       }
 
       const resultData = result['soap:Envelope']['soap:Body'][0]['PedidosResponse'][0]['PedidosResult'][0];
+      console.log(resultData);
       res.status(200).send(resultData);
     });
   } catch (error) {
